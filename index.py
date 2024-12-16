@@ -5,33 +5,50 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.chrome.options import Options
 import time 
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 service = Service("driver/chromedriver.exe")
-bot = webdriver.Chrome(service = service)
-bot.maximize_window()
-time.sleep(1)
-bot.get("https://www.google.com/aclk?sa=l&ai=DChcSEwiHyfqGkKWKAxW4ploFHb3nKnEYABAAGgJ2dQ&co=1&ase=2&gclid=EAIaIQobChMIh8n6hpCligMVuKZaBR295ypxEAAYASAAEgLHF_D_BwE&sig=AOD64_08T32SS9CJ43d0AP7Yjm0IurV8Ig&q&nis=4&adurl&ved=2ahUKEwjXkPWGkKWKAxXFs4QIHZjjFWQQ0Qx6BAgLEAE")
-#bot.get("https://www.viajesexito.com/")
-time.sleep(5)
-'''
-popup = bot.find_element(By.XPATH, '/html/body/div/div/div/div[1]')
-time.sleep(10)
-popup.click()
-time.sleep(10) '''
+chrome_options = Options()
+chrome_options.add_argument("--incognito") 
 
-#vuelo + hotel
+bot = webdriver.Chrome(service=service, options=chrome_options)
+bot.maximize_window()
+
+bot.get("https://www.viajesexito.com/")
+time.sleep(5)
+
+
+try:
+    iframe = WebDriverWait(bot, 10).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "#e9fb4a0d-0e45-4a5f-996c-fe6e4c4e72d5 > div > iframe"))
+    )
+    bot.switch_to.frame(iframe)
+
+    close_button = WebDriverWait(bot, 10).until(
+        EC.element_to_be_clickable((By.CLASS_NAME, "bhr-ip__c__close"))
+    )
+    close_button.click()
+    print("Anuncio cerrado con éxito")
+
+    bot.switch_to.default_content()
+
+except Exception as e:
+    print("Error al cerrar el anuncio: {e}")
+
 fligth = bot.find_element(By.XPATH, '/html/body/form/div[3]/div/div[2]/article/div/div[1]/div/div[1]/div/div/div[2]/div[1]/ul/li[3]/a')
 time.sleep(3)
 fligth.click()
 time.sleep(5)
 
-#buscar aero
 input = "José María Cordova (MDE)"
 airport = bot.find_element(By.XPATH, '/html/body/form/div[3]/div/div[2]/article/div/div[1]/div/div[1]/div/div/div[2]/div[2]/div[3]/div[2]/div[1]/div/div/div[1]/div/div[1]/div/div/input')
-time.sleep(3)
+time.sleep(10)
 airport.click()
-time.sleep(5)
 airport.send_keys(input)
-time.sleep(5)
-airport.send_keys(Keys.ENTER)
-time.sleep(5)
+print(airport.get_attribute('value'))
+time.sleep(10)
+#airport.send_keys(Keys.DOWN)
+#airport.send_keys(Keys.ENTER) 
+#airport.send_keys(Keys.ENTER)
+#time.sleep(10)
