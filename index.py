@@ -25,10 +25,10 @@ try:
     )
     bot.switch_to.frame(iframe)
 
-    close_button = WebDriverWait(bot, 10).until(
+    closeButton = WebDriverWait(bot, 10).until(
         EC.element_to_be_clickable((By.CLASS_NAME, "bhr-ip__c__close"))
     )
-    close_button.click()
+    closeButton.click()
     print("Anuncio cerrado con éxito")
 
     bot.switch_to.default_content()
