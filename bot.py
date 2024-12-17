@@ -174,3 +174,45 @@ except Exception as e:
     print(f"Error: {e}")
 
 time.sleep(3)    
+
+try:
+
+    airline = "avianca (AV)"
+
+    advancedOptions_js = """
+    let advancedOptionsButton = document.querySelector("a.active-button");
+    advancedOptionsButton.click();
+    """
+    driver.execute_script(advancedOptions_js)
+    print("Click on the 'Advanced Options' button")
+
+    time.sleep(3)  
+
+    airlineText_js = """
+    let airlineText = document.getElementById('txtAirlineCode');
+    airlineText.click();
+    """
+    driver.execute_script(airlineText_js)
+    print("Click on the airline field")
+
+    time.sleep(3)  
+
+    copyAirline_js = f"""
+    let airlineText  = document.getElementById('txtAirlineCode');
+    airlineText .value = '{airline}';
+    airlineText .dispatchEvent(new Event('input', {{ bubbles: true }}));  // Simular entrada
+    """
+    driver.execute_script(copyAirline_js)
+    print(f"Value '{airline}' entered in the airline field and Enter pressed.")
+
+    time.sleep(2) 
+
+    click_button_js = """
+    let searchButton = document.querySelector('input.button.expanded.round.small.btnPackageDoNewSearch');
+    if (searchButton) searchButton.click();
+    """
+    driver.execute_script(click_button_js)
+    print("Click on the search button")
+
+except Exception as e:
+    print(f"Error during interaction with 'Advanced Options': {e}")
