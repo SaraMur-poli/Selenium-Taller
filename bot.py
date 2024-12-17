@@ -23,3 +23,55 @@ url = "https://www.viajesexito.com"
 driver.get(url)
 
 print(f"Open page: {driver.title}")
+
+try:
+
+    iframe = WebDriverWait(driver, 20).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "#\\39 9b8a2c4-84a1-445d-89e3-c7c1ca9a7f65 > div > iframe"))
+    )
+    driver.switch_to.frame(iframe) 
+    print("Switch to the Pop-up iframe")
+
+    closeButton = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.CLASS_NAME, "bhr-ip__c__close"))
+    )
+    closeButton.click()
+    print("Pop-up closed successfully")
+
+    driver.switch_to.default_content()
+
+    time.sleep(3) 
+
+    fligth = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, '//*[@id="paquetesTooltips"]/a'))
+    )
+    fligth.click()
+    print("Click made in flight+hotel")
+
+    time.sleep(3) 
+
+    fligthOriginText = "José María Cordova"
+    pyperclip.copy(fligthOriginText)  
+
+    fligthOrigin = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, '//*[@id="CityPredictiveFrom_netactica_airhotel"]'))
+    )
+    fligthOrigin.click()  
+
+    time.sleep(3) 
+
+    ActionChains(driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
+    ActionChains(driver).send_keys(Keys.ENTER).perform()
+    print("Pasted text  y enter pressed in the city of origin")
+
+    time.sleep(3) 
+
+    fligthArrivalText = "(CUN-Aeropuerto Internacional de Cancún)"
+    pyperclip.copy(fligthArrivalText) 
+
+    fligthArrival = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, '//*[@id="CityPredictiveTo_netactica_airhotel"]'))
+    )
+    fligthArrival.click()  
+
+    time.sleep(3) 
