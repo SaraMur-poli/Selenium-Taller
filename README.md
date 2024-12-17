@@ -18,6 +18,7 @@ This is a project for our university where we have to program a BOT, that using 
 5. In the terminal, type "pip install selenium" enter, and "pip install pyperclip" enter.
 6. Now, you can close the terminal and use the RUN button
 
-##Contributors
+## Contributors
+
 Sara MariaMurillo Carrero
 Luna Penagos Garcia   
