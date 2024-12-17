@@ -20,5 +20,5 @@ This is a project for our university where we have to program a BOT, that using 
 
 ## Contributors
 
-Sara MariaMurillo Carrero.  
+Sara Maria Murillo Carrero.  
 Luna Penagos Garcia.   
