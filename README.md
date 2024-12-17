@@ -7,6 +7,7 @@ This is a project for our university where we have to program a BOT, that using 
 ## Index
 
 1. [Installation](#installation)
+2. [Contributors](#Contributors)
 
 ## Installation
 
@@ -16,3 +17,7 @@ This is a project for our university where we have to program a BOT, that using 
 4. In the terminal, type "cd Selenium-Taller" enter,  and then type "git code ." enter.
 5. In the terminal, type "pip install selenium" enter, and "pip install pyperclip" enter.
 6. Now, you can close the terminal and use the RUN button
+
+##Contributors
+Sara MariaMurillo Carrero
+Luna Penagos Garcia   
