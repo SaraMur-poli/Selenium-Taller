@@ -75,3 +75,24 @@ try:
     fligthArrival.click()  
 
     time.sleep(3) 
+
+    ActionChains(driver).key_down(Keys.CONTROL).send_keys('v').key_up(Keys.CONTROL).perform()
+    print("Pasted text and click on the destination city")
+
+    time.sleep(3) 
+
+    xpath_airport = "//li[@item-name='Cancún, Quintana Roo (CUN-Aeropuerto Internacional de Cancún)']"
+    airport_element = driver.find_element(By.XPATH, xpath_airport)
+    airport_element.click()
+
+    time.sleep(3) 
+
+    departureDate_js = """
+        let departureDate = document.getElementById('DateFrom_netactica_airhotel');
+        departureDate.value = '26-12-2024';
+        departureDate.dispatchEvent(new Event('change', { bubbles: true }));
+    """
+    driver.execute_script(departureDate_js)
+    print("Departure date: 26-12-2024")
+
+    time.sleep(3)
