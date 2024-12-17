@@ -144,3 +144,33 @@ try:
 
 except Exception as e:
     print(f"Error filling in the fields: {e}")
+
+try:
+
+    print("Waiting for the new window to open...")
+    WebDriverWait(driver, 10).until(lambda d: len(d.window_handles) > 1)
+
+    windows = driver.window_handles
+
+    driver.switch_to.window(windows[-1])
+    print("Switch to results window")
+
+    WebDriverWait(driver, 20).until(
+        EC.presence_of_all_elements_located((By.CSS_SELECTOR, "p.totalpackprice.small-text-center.price-extra.money"))
+    )
+    print("Specific package prices have been uploaded successfully")
+
+    bookingPrice = driver.find_elements(By.CSS_SELECTOR, "p.totalpackprice.small-text-center.price-extra.money")
+    print("Prices of the packages found:")
+
+    for price in bookingPrice:
+
+        priceText = price.find_element(By.CLASS_NAME, "currencyText").text.strip()
+        print(priceText)
+    
+    time.sleep(2)
+
+except Exception as e:
+    print(f"Error: {e}")
+
+time.sleep(3)    
