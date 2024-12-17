@@ -216,3 +216,33 @@ try:
 
 except Exception as e:
     print(f"Error during interaction with 'Advanced Options': {e}")
+
+try:
+
+    WebDriverWait(driver, 20).until(
+        EC.presence_of_all_elements_located((By.CSS_SELECTOR, "p.totalpackprice.small-text-center.price-extra.money"))
+    )
+    print("Specific package prices have been uploaded successfully")
+
+    bookingPrice = driver.find_elements(By.CSS_SELECTOR, "p.totalpackprice.small-text-center.price-extra.money")
+    print("Package prices found according to the airline:")
+
+    for price in bookingPrice:
+
+        priceText = price.find_element(By.CLASS_NAME, "currencyText").text.strip()
+        print(priceText)
+    
+    time.sleep(2)
+
+except Exception as e:
+    print(f"Error: {e}")
+
+click_whatsapp_js = """
+let whatsAppButton = document.querySelector('a[href*="https://api.whatsapp.com/send"]');
+if (whatsAppButton) whatsAppButton.click();
+"""
+driver.execute_script(click_whatsapp_js)
+print("Click on the WhatsApp button")
+
+time.sleep(5)
+driver.quit()
