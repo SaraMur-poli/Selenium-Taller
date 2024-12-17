@@ -115,3 +115,32 @@ try:
     print("A second room was added")
 
     time.sleep(5)
+
+    room1_js = """
+        let room1 = document.querySelector('#ddlAirHotelNumberAdults');
+        room1.value = '2';
+        room1.dispatchEvent(new Event('change', { bubbles: true }));
+    """
+    time.sleep(3)
+    driver.execute_script(room1_js)
+    print("First room configured for 2 people")
+
+    room2_js = """
+        let room2 = document.getElementById('ddlAirHotelNumberAdultsDos');
+        room2.value = '3';
+        room2.dispatchEvent(new Event('change', { bubbles: true }));
+    """
+    driver.execute_script(room2_js)
+    print("Second room configured for 3 people")
+    time.sleep(5)
+
+
+    searchButton_js = """
+    let searchButton = document.getElementById('sbm_netactica_airhotel');
+    searchButton.click();
+    """
+    driver.execute_script(searchButton_js)
+    print("Click on the search button")
+
+except Exception as e:
+    print(f"Error filling in the fields: {e}")
