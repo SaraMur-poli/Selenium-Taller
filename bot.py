@@ -96,3 +96,22 @@ try:
     print("Departure date: 26-12-2024")
 
     time.sleep(3)
+
+    arrivalDate_js = """
+        let arrivalDate = document.getElementById('DateTo_netactica_airhotel');
+        arrivalDate.value = '05-01-2025';
+        arrivalDate.dispatchEvent(new Event('change', { bubbles: true }));
+    """
+    driver.execute_script(arrivalDate_js)
+    print("Return date: 05-01-2025")
+
+    time.sleep(5)
+    addRoom_js = """
+        let button = document.getElementById('btbAddRoomtwopaquetes');
+        button.click();
+    """
+    time.sleep(5)
+    driver.execute_script(addRoom_js)
+    print("A second room was added")
+
+    time.sleep(5)
